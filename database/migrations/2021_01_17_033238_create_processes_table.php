@@ -18,6 +18,7 @@ class CreateProcessesTable extends Migration
     {
         Schema::create('processes', function (Blueprint $table) {
             $table->id();
+            $table->string('job_uuid');
             $table->integer('attempt');
             $table->string('message');
             $table->integer('processable_id');

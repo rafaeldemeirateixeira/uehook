@@ -16,6 +16,7 @@ class Process extends Model
      * @var array
      */
     public $fillable = [
+        'job_uuid',
         'attempt',
         'message'
     ];
