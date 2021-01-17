@@ -3,20 +3,9 @@
 namespace App\Jobs;
 
 use App\Models\Order;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 
-class CreateProcessJob implements ShouldQueue
+class CreateProcessJob extends Job
 {
-    use Dispatchable;
-    use InteractsWithQueue;
-    use Queueable;
-    use SerializesModels;
-
     /**
      * @var Order
      */
@@ -39,10 +28,6 @@ class CreateProcessJob implements ShouldQueue
      */
     public function handle()
     {
-        $this->order->process()->create([
-            'job_uuid' => $this->job->uuid(),
-            'attempt' => $this->attempts(),
-            'message' => 'started'
-        ]);
+        $this->log($this->order, 'started');
     }
 }
